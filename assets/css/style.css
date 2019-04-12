@@ -1,0 +1,13 @@
+body {
+
+    background-image: url("../images/yellowking.png");
+}
+h1 {
+    color: red;
+    font-size: bold;
+}
+
+p {
+    color: black;
+    font-size: 200%;
+}
