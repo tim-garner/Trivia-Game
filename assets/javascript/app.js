@@ -1,66 +1,134 @@
+console.log("working")
 
-alert("Working");
+//Audio
+var audioElement = document.createElement("audio");
+//create source
+audioElement.setAttribute("src", "assets/TD.mp3");
 
-//clock will run when page starts
-window.onload = function() {
-    $("#start").on("click",start);
-    $("#reset").on("click",reset);
-};
+// theme Button
+$(".theme-button").on("click", function(){
+        audioElement.play();
+});
 
-var intervalId;
+//Pause Button
+$(".pause-button").on("click", function(){
+    audioElement.pause();
+});
 
-//set up display
-$("#display").text("03:00");
 
-//need to set up start/reset   
-function start () {
-    if (!clockRunning) {
-    intervalId = setInterval(count, 1000);
-    clockRunning = true;
+var myQuestions = [
+    {
+        question: "What state did the show take place?",
+        answers: {
+            a: 'Texas',
+            b: 'Louisana',
+            c: 'Arkansas',
+        },
+        correctAnswer: 'b'
+    },
+    {
+        question: "what is the name of the texas beer thats featured in the show?",
+        answers: {
+            a: 'Lonestar',
+            b: 'Coors',
+            c: 'Shiner Beer',
+        },
+        correctAnswer: 'a'
+    },
+    {      question: "What is the name of the biker gang?",
+    answers: {
+        a: 'Hells Angels',
+        b: 'The Mighty Ducks',
+        c: 'Iron Cruisaders',
+    },
+    correctAnswer: 'c'
+},
+    ];
+
+var quizContainer = document.getElementById('quiz');
+var resultsContainer = document.getElementById('results');
+var submitButton = document.getElementById('submit');
+
+generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
+
+function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
+
+    function showQuestions(questions, quizContainer){
+        // we'll need a place to store the output and the answer choices
+        var output = [];
+        var answers;
+
+        // for each question...
+        for(var i=0; i<questions.length; i++){
+            
+            // first reset the list of answers
+            answers = [];
+
+            // for each available answer...
+            for(letter in questions[i].answers){
+
+                // ...add an html radio button
+                answers.push(
+                    '<label>'
+                        + '<input type="radio" name="question'+i+'" value="'+letter+'">'
+                        + letter + ': '
+                        + questions[i].answers[letter]
+                    + '</label>'
+                );
+            }
+
+            // add this question and its answers to the output
+            output.push(
+                '<div class="question">' + questions[i].question + '</div>'
+                + '<div class="answers">' + answers.join('') + '</div>'
+            );
+        }
+
+        // finally combine our output list into one string of html and put it on the page
+        quizContainer.innerHTML = output.join('');
     }
+
+
+    function showResults(questions, quizContainer, resultsContainer){
+        
+        // gather answer containers from our quiz
+        var answerContainers = quizContainer.querySelectorAll('.answers');
+        
+        // keep track of user's answers
+        var userAnswer = '';
+        var numCorrect = 0;
+        
+        // for each question...
+        for(var i=0; i<questions.length; i++){
+
+            // find selected answer
+            userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')||{}).value;
+            
+            // if answer is correct
+            if(userAnswer===questions[i].correctAnswer){
+                // add to the number of correct answers
+                numCorrect++;
+                
+                // color the answers green
+                answerContainers[i].style.img = 'lightgreen';
+            }
+            // if answer is wrong or blank
+            else{
+                // color the answers red
+                answerContainers[i].style.color = 'red';
+            }
+        }
+
+        // show number of correct answers out of total
+        resultsContainer.innerHTML = numCorrect + ' out of ' + questions.length;
+    }
+
+    // show questions right away
+    showQuestions(questions, quizContainer);
+    
+    // on submit, show results
+    submitButton.onclick = function(){
+        showResults(questions, quizContainer, resultsContainer);
+    }
+
 }
-
-function reset() {
-    clearInterval(intervalId);
-    clockRunning = false;
-}
-
-    //We need to set up questions and answers
-    $(document).ready(function () {
-
-        //questions log
-        var questions = 
-        [
-            {
-            question: "What state did the show take place?"
-            answers: {
-                a: 'Texas',
-                b: 'North Carolina',
-                c: 'Louisana',
-                d: 'Arkansas'
-            },
-            rightAnswer: 'd'
-        },
-        {
-            question: "what is the name of the texas beer?"
-            answers: {
-                a: 'Lonestar',
-                b: 'Coors',
-                c: 'Shiner Beer',
-                d: 'Bud Light'
-            },
-            rightAnswer: 'a'
-        },
-        {
-
-            question: "What is the name of the biker gang?"
-            answers: {
-                a: 'Hells Angels',
-                b: 'The Mighty Ducks',
-                c: 'Iron Cruisaders',
-                d: 'AHHH REAL MONSTERS',
-        },
-        rightAnswer: 'c'
-}
-
-];
