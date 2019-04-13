@@ -1,5 +1,9 @@
-body {
+.card-body {
     background-image: url("../images/yellowking.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    
 
 }
 h1 {
@@ -9,15 +13,18 @@ h1 {
 
 p {
     color: black;
-    font-size: 200%;
+    font-size: 100%;
 }
 
 div {
     font-size: 125%;
-    color: yellow;
+    color: black;
 }
 
 button {
     background-color: blue;
     color: white;
+    border-style: hidden;
+
 }
+

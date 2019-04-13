@@ -15,37 +15,67 @@
 
 <div class="jumbotron">
     <h1 class="display-4">True Detective Trivia Game</h1>
-    <p class="lead">You will have three questions about True Detective Season 1. </p>
+    <p class="lead">You will have five questions about True Detective Season 1. </p>
     <hr class="my-4">
-    <p>The answers will be in multiple choice format.</p>
-  </div>
-  <div class="text-center">
+    <p>The answers will be in multiple choice format. You will have three minutes to complete the quiz. Please see the bottom of the page for your score.</p>
+    <p>Feel free to play the music!</p>
+    <p>Beware of Spoilers!!!</p>
+    <div class="text-center">
         <button class="btn btn-warning btn-xs theme-button">
                 <span class="fa fa-music"></span> Play Theme!</button>
               <button class="btn btn-default btn-xs pause-button">
                 <span class="fa fa-pause"></span> Pause Song</button>
+                <br>
+                <br>
+
+                <div id="show-number"></div>
+
+                <button id="stop">stop</button>
+                <button id="restart">restart</button>
+                <br>
+              
                 </div>
             </div>
             <br>
-            <br>
-            <br>
 
-            <div id="wrapper">
-                    <div id="quiz"></div>
-                    <button id="submit">See your Answer</button>
-                    <div id="results"></div>
-                    </div>
-    
+
+  </div>
+ 
+                    
+      
+  
 
 <body>
  
+    <div class="card text-center">
+        <div class="card-header">
+         Time is a flat circle
+        </div>
+        <div class="card-body">
+            <div id="wrapper">
+                <div id="quiz"></div>
+                <button id="submit">See your Answer</button>
+                <div id="results"></div>
+                </div>
         
+        </div>
+        <div class="card-footer text-muted">
+          You are in Carcosa now
+        </div>
+      </div>
 
+
+ 
+  
            <!--JavaScript-->
     <script type="text/javascript" src="assets/javascript/app.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     
 </body>
 </html>

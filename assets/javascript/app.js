@@ -1,5 +1,7 @@
 console.log("working")
 
+
+
 //Audio
 var audioElement = document.createElement("audio");
 //create source
@@ -15,10 +17,60 @@ $(".pause-button").on("click", function(){
     audioElement.pause();
 });
 
+//now we need to do the window on load function
+window.onload = function() {
+$("#stop").on("click", stop);
+$("#reset").on("click", reset);
+};
+
+
+
+//now we gotta set the counter
+var number = 180;
+//now we have to make it run
+var intervalId;
+//when you hit stop, it stops
+$("stop").on("click",stop);
+//restart continues the clock
+$("#restart").on("click", run);
+// must create a function
+function run() {
+    clearInterval(intervalId);
+    intervalId = setInterval(decrement,1000);
+
+}
+//decrement 1000 is a second
+function decrement() {
+    //decreases by one
+    number--;
+    //Show the number in the #show-number tag.
+    $("#show-number").html("<h2>" + number + "</h2>");
+
+    //the number will hit zero
+    if (number ===0) {
+        //..stops from going into the negative
+        stop();
+        alert("Dun Dun Dun Times Up")
+
+
+    }
+
+}
+
+//now we need the stop function
+function stop() {
+    //this clears the interval
+    clearInterval(intervalId);
+    clockRunning = false;
+}
+
+//now we need the run function
+run();
+
 
 var myQuestions = [
     {
-        question: "What state did the show take place?",
+        question: "1.) Where did the show take place?",
         answers: {
             a: 'Texas',
             b: 'Louisana',
@@ -27,7 +79,7 @@ var myQuestions = [
         correctAnswer: 'b'
     },
     {
-        question: "what is the name of the texas beer thats featured in the show?",
+        question: "2.) What is the name of the texas beer thats featured in the show?",
         answers: {
             a: 'Lonestar',
             b: 'Coors',
@@ -35,7 +87,7 @@ var myQuestions = [
         },
         correctAnswer: 'a'
     },
-    {      question: "What is the name of the biker gang?",
+    {      question: "3.) What is the name of the biker gang?",
     answers: {
         a: 'Hells Angels',
         b: 'The Mighty Ducks',
@@ -43,7 +95,25 @@ var myQuestions = [
     },
     correctAnswer: 'c'
 },
+{      question: "4.) Who was Reggie Ladoux's Cell mate?",
+answers: {
+    a: 'Charlie Lang',
+    b: 'Steve Geraci',
+    c: 'Marty Hart',
+},
+correctAnswer: 'a'
+},
+{      question: "5.)   Who is the Yellow King?",
+answers: {
+    a: 'Reggie Ladoux',
+    b: 'Errol Childress',
+    c: 'Reverend Tuttle',
+},
+correctAnswer: 'b'
+},
     ];
+
+    console.log(myQuestions)
 
 var quizContainer = document.getElementById('quiz');
 var resultsContainer = document.getElementById('results');
@@ -109,8 +179,6 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
                 // add to the number of correct answers
                 numCorrect++;
                 
-                // color the answers green
-                answerContainers[i].style.img = 'lightgreen';
             }
             // if answer is wrong or blank
             else{
